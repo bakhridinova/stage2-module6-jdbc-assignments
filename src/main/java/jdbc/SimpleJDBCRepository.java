@@ -20,12 +20,12 @@ public class SimpleJDBCRepository {
     private Statement st = null;
     private CustomDataSource dataSource = CustomDataSource.getInstance();
 
-    private static final String CREATE_USER = "INSERT INTO myusers(firstname, lastname, age) VALUES (?, ?, ?);";
-    private static final String UPDATE_USER = "UPDATE myusers SET firstname=?, lastname=?, age=? WHERE id=?;";
-    private static final String DELETE_USER = "DELETE FROM public.myuses WHERE id=?";
-    private static final String FIND_USER_BY_ID = "SELECT id, firstname, lastname, age FROM myusers WHERE id = ?";
-    private static final String FIND_USER_BY_NAME = "SELECT id, firstname, lastname, age FROM myusers WHERE firstname LIKE CONCAT('%', ?, '%')";
-    private static final String FIND_ALL_USER = "SELECT id, firstname, lastname, age FROM myusers";
+    private static final String CREATE_USER = "INSERT INTO myusers(firstname, lastname, age) VALUES(?, ?, ?)";
+    private static final String UPDATE_USER = "UPDATE myusers SET firstname = ?, lastname = ?, age = ? WHERE id = ?";
+    private static final String DELETE_USER = "DELETE FROM myusers WHERE id = ?";
+    private static final String FIND_USER_BY_ID = "SELECT * FROM myusers WHERE id = ?";
+    private static final String FIND_USER_BY_NAME = "SELECT * FROM myusers WHERE firstname = ?";
+    private static final String FIND_ALL_USERS = "SELECT * FROM myusers";
 
     public Long createUser(User user) {
         Long id = null;
@@ -80,7 +80,7 @@ public class SimpleJDBCRepository {
         List<User> users = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement(FIND_ALL_USER)) {
+             PreparedStatement statement = connection.prepareStatement(FIND_ALL_USERS)) {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 users.add(getAllUserParametersFromResultSet(resultSet));
