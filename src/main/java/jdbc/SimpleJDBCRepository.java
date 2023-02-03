@@ -23,8 +23,8 @@ public class SimpleJDBCRepository {
     private static final String CREATE_USER = "INSERT INTO myusers(firstname, lastname, age) VALUES (?, ?, ?);";
     private static final String UPDATE_USER = "UPDATE myusers SET firstname=?, lastname=?, age=? WHERE id=?;";
     private static final String DELETE_USER = "DELETE FROM public.myuses WHERE id=?";
-    private static final String FIND_USER_BY_ID = "SELECT id, firstname, lastname, age FROM myusersWHERE id = ?";
-    private static final String FIND_USER_BY_NAME = "SELECT id, firstname, lastname, age FROM myusersWHERE firstname LIKE CONCAT('%', ?, '%')";
+    private static final String FIND_USER_BY_ID = "SELECT id, firstname, lastname, age FROM myusers WHERE id = ?";
+    private static final String FIND_USER_BY_NAME = "SELECT id, firstname, lastname, age FROM myusers WHERE firstname LIKE CONCAT('%', ?, '%')";
     private static final String FIND_ALL_USER = "SELECT id, firstname, lastname, age FROM myusers";
 
     public Long createUser(User user) {
